@@ -178,10 +178,16 @@
     <!-- Navbar -->
     <div class="navbar">
       <h2>BlogSpace</h2>
+      {% if is_logedin %}
+      <div class="nav-buttons">
+        <button class="signup-btn" onclick="logout()">Logout</button>
+      </div>
+      {% else %}
       <div class="nav-buttons">
         <button class="login-btn">Login</button>
         <button class="signup-btn">Signup</button>
       </div>
+      {% endif %}
     </div>
 
     <!-- Main Content -->
@@ -196,6 +202,7 @@
         <div class="blog-grid">
           {% for post in posts %}
           <div class="blog-card">
+            <h3>{{ post.user_id.uname }}</h3>
             <h3>{{ post.id }}</h3>
             <h3>{{ post.title }}</h3>
             <p>{{ post.content }}</p>
@@ -373,6 +380,20 @@
           modal.style.display = "none";
         }
       };
+
+      function logout() {
+        fetch("/api/logout/", {
+          method: "POST",
+          headers: {
+            "X-CSRFToken": "{{ csrf_token }}",
+          },
+        }).then((response) => {
+          if (response.ok) {
+            location.reload();
+            window.location.href = "/api/login/"; // Redirect after success
+          }
+        });
+      }
     </script>
   </body>
 </html>

@@ -26,7 +26,13 @@ SECRET_KEY = 'django-insecure-p4la%4bkkuadn9^ow9@sd033#z15jz60b7+t(%tb3pc^39p7fi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+import os
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Application definition
@@ -38,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'posts'
+    'posts',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -49,6 +56,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'blog.urls'
@@ -80,9 +89,30 @@ DATABASES = {
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # },
 }
+
+# connect(
+# #     # host="mongodb+srv://debabratasenapati2021_db_user:iYc0KfKFbSMik5ez@cluster0.f0jhytt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+#         db='Pyblog',
+#         host="mongodb+srv://debabratasenapati2021_db_user:iYc0KfKFbSMik5ez@cluster0.f0jhytt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+#         # host ="mongodb://debabratasenapati2021_db_user:iYc0KfKFbSMik5ez@ac-q6zcjne-shard-00-00.f0jhytt.mongodb.net:27017,ac-q6zcjne-shard-00-01.f0jhytt.mongodb.net:27017,ac-q6zcjne-shard-00-02.f0jhytt.mongodb.net:27017/?ssl=true&replicaSet=atlas-g87yl8-shard-0&authSource=admin&appName=Cluster0"
+# )
+
+# connect(
+#     db='Pyblog',
+#     host="mongodb+srv://debabratasenapati2021_db_user:iYc0KfKFbSMik5ez@cluster0.f0jhytt.mongodb.net/Pyblog?retryWrites=true&w=majority"
+# )
+# connect(
+#     db="pythonBlogDb",
+#     host="localhost",
+#     port=27017
+# )
+
+# uri = "mongodb://debabratasenapati2021_db_user:sHK9hMg2Y4YM2v6K@ac-q6zcjne-shard-00-00.f0jhytt.mongodb.net:27017,ac-q6zcjne-shard-00-01.f0jhytt.mongodb.net:27017,ac-q6zcjne-shard-00-02.f0jhytt.mongodb.net:27017/?ssl=true&replicaSet=atlas-g87yl8-shard-0&authSource=admin&appName=Cluster0"
+
+# when post on docker
 connect(
     db="pythonBlogDb",
-    host="localhost",
+    host="host.docker.internal",
     port=27017
 )
 

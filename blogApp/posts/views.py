@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from .models import Post
-from django.http import JsonResponse
+
 
 # Create your views here.
 
@@ -9,12 +9,17 @@ def health(request):
     return HttpResponse("Health is Ok")
 
 def home(request):
-    posts = Post.objects.order_by('-created_at')
-    return render(request,'index.html',{'posts':posts})
+    is_logedin = True
+    if 'user_id' not in request.COOKIES:
+        is_logedin = False
+        return redirect('login')
+    posts = Post.objects(user_id=request.COOKIES.get('user_id','1')).order_by('-created_at')
+    return render(request,'index.html',{'posts':posts,'is_logedin':is_logedin})
 
 def add_blog(request):
     if request.method == 'POST':
-        Post(title=request.POST.get('title'),content=request.POST.get('content')).save()
+        
+        Post(user_id=request.COOKIES.get('user_id','1'),title=request.POST.get('title'),content=request.POST.get('content')).save()
     return redirect('home') 
 
 def delete_blog(request, id):
