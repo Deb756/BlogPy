@@ -31,10 +31,10 @@ def delete_blog(request, id):
 
     return JsonResponse({'status': 'failed'})
 
-def edit_blog(request):
+def edit_blog(request,id):
     print(request.session.get)
     if request.method == "POST":
-        Post.objects(id=request.session.get('user_id')).update(
+        Post.objects(id=id).update(
             title=request.POST.get('title'),
             content=request.POST.get('content')
         )

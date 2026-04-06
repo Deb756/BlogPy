@@ -291,7 +291,7 @@
         let content = document.getElementById("editContent").value;
         let csrfToken = document.getElementById("csrfToken").value;
 
-        fetch(`/api/edit/`, {
+        fetch(`/api/edit/${id}/`, {
           method: "POST",
           headers: {
             "X-CSRFToken": csrfToken,
