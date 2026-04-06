@@ -34,6 +34,8 @@ import os
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
 
 # Application definition
 
@@ -97,10 +99,10 @@ DATABASES = {
 #         # host ="mongodb://debabratasenapati2021_db_user:iYc0KfKFbSMik5ez@ac-q6zcjne-shard-00-00.f0jhytt.mongodb.net:27017,ac-q6zcjne-shard-00-01.f0jhytt.mongodb.net:27017,ac-q6zcjne-shard-00-02.f0jhytt.mongodb.net:27017/?ssl=true&replicaSet=atlas-g87yl8-shard-0&authSource=admin&appName=Cluster0"
 # )
 
-# connect(
-#     db='Pyblog',
-#     host="mongodb+srv://debabratasenapati2021_db_user:iYc0KfKFbSMik5ez@cluster0.f0jhytt.mongodb.net/Pyblog?retryWrites=true&w=majority"
-# )
+connect(
+    db='Pyblog',
+    host="mongodb://debabratasenapati2021_db_user:sHK9hMg2Y4YM2v6K@ac-q6zcjne-shard-00-00.f0jhytt.mongodb.net:27017,ac-q6zcjne-shard-00-01.f0jhytt.mongodb.net:27017,ac-q6zcjne-shard-00-02.f0jhytt.mongodb.net:27017/?ssl=true&replicaSet=atlas-g87yl8-shard-0&authSource=admin&appName=Cluster0"
+)
 # connect(
 #     db="pythonBlogDb",
 #     host="localhost",
@@ -110,11 +112,11 @@ DATABASES = {
 # uri = "mongodb://debabratasenapati2021_db_user:sHK9hMg2Y4YM2v6K@ac-q6zcjne-shard-00-00.f0jhytt.mongodb.net:27017,ac-q6zcjne-shard-00-01.f0jhytt.mongodb.net:27017,ac-q6zcjne-shard-00-02.f0jhytt.mongodb.net:27017/?ssl=true&replicaSet=atlas-g87yl8-shard-0&authSource=admin&appName=Cluster0"
 
 # when post on docker
-connect(
-    db="pythonBlogDb",
-    host="host.docker.internal",
-    port=27017
-)
+# connect(
+#     db="pythonBlogDb",
+#     host="host.docker.internal",
+#     port=27017
+# )
 
 
 # Password validation
